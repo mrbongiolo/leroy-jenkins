@@ -7,6 +7,7 @@ defmodule LeroyJenkins.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug :delete_resp_header, "x-frame-options" # Ok, this is insecure, but we need it for now to allow embedding it in an iframe
   end
 
   pipeline :api do

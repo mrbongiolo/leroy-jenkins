@@ -10,5 +10,15 @@
     = label f, :description, class: "control-label"
     = textarea f, :description, class: "form-control"
     = error_tag f, :description
+  .checkbox
+    = label f, :unique_cpf, class: "control-label" do
+      = checkbox f, :unique_cpf
+      | CPF único
+    = error_tag f, :unique_cpf
+  .checkbox
+    = label f, :unique_ip, class: "control-label" do
+      = checkbox f, :unique_ip
+      | IP único
+    = error_tag f, :unique_ip
   .form-group
     = submit "Submit", class: "btn btn-primary"

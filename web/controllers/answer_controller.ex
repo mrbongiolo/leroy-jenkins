@@ -10,9 +10,11 @@ defmodule LeroyJenkins.AnswerController do
   plug :set_remote_ip, "answer" when action in [:create]
 
   def new(conn, %{"alternative_id" => alternative_id}) do
-    alternative = Repo.get!(Alternative, alternative_id)
+    alternative =
+      Repo.get!(Alternative, alternative_id)
       |> Repo.preload(:form)
-    changeset = alternative
+    changeset =
+      alternative
       |> build_assoc(:answers)
       |> Answer.changeset()
       |> Ecto.Changeset.put_change(:ip, %Postgrex.INET{address: conn.remote_ip})
@@ -24,10 +26,12 @@ defmodule LeroyJenkins.AnswerController do
   end
 
   def create(conn, %{"alternative_id" => alternative_id, "answer" => answer_params}) do
-    alternative = Repo.get!(Alternative, alternative_id)
+    alternative =
+      Repo.get!(Alternative, alternative_id)
       |> Repo.preload(:form)
-    changeset = alternative
-      |> build_assoc(:answers)
+    changeset =
+      alternative
+      |> build_assoc(:answers, form_id: alternative.form_id)
       |> Answer.changeset(answer_params)
 
     case Repo.insert(changeset) do

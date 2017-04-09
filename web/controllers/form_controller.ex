@@ -31,10 +31,12 @@ defmodule LeroyJenkins.FormController do
 
   def show(conn, %{"id" => id}) do
     form = Repo.get!(Form, id)
-    alternatives = assoc(form, :alternatives)
+    alternatives =
+      assoc(form, :alternatives)
       |> Alternative.count_answers
       |> Repo.all
-    alternative_changeset = form
+    alternative_changeset =
+      form
       |> build_assoc(:alternatives)
       |> Alternative.changeset()
 

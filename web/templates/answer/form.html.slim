@@ -21,5 +21,6 @@
   .form-group
     = label f, :ip, class: "control-label"
     = text_input f, :ip, disabled: true, class: "form-control"
+    = error_tag f, :ip
   .form-group
     = submit "Submit", class: "btn btn-primary"

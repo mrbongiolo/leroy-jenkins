@@ -7,6 +7,12 @@ ul
   li
     strong Description:&nbsp;
     = @form.description
+  li
+    strong> CPF:
+    = if @form.unique_cpf, do: 'único', else: 'não único'
+  li
+    strong> IP:
+    = if @form.unique_ip, do: 'único', else: 'não único'
 
 h3 Alternatives
 
