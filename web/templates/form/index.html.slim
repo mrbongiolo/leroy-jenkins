@@ -1,0 +1,21 @@
+h2 Listing forms
+
+table.table
+  thead
+    tr
+      th Question
+      th Description
+      th
+  tbody
+    = for form <- @forms do
+      tr
+        td= form.question
+        td= form.description
+        td class="text-right"
+          = link "Show", to: form_path(@conn, :show, form), class: "btn btn-default btn-xs"
+          | &nbsp;
+          = link "Edit", to: form_path(@conn, :edit, form), class: "btn btn-default btn-xs"
+          | &nbsp;
+          = link "Delete", to: form_path(@conn, :delete, form), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs"
+
+= link "New form", to: form_path(@conn, :new)

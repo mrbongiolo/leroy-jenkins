@@ -1,0 +1,25 @@
+= form_for @changeset, @action, fn f ->
+  = if @changeset.action do
+    .alert.alert-danger
+      p Oops, something went wrong! Please check the errors below.
+  .form-group
+    = label f, :name, class: "control-label"
+    = text_input f, :name, class: "form-control"
+    = error_tag f, :name
+  .form-group
+    = label f, :address, class: "control-label"
+    = text_input f, :address, class: "form-control"
+    = error_tag f, :address
+  .form-group
+    = label f, :cpf, class: "control-label"
+    = text_input f, :cpf, class: "form-control"
+    = error_tag f, :cpf
+  .form-group
+    = label f, :suggestions, class: "control-label"
+    = textarea f, :suggestions, class: "form-control"
+    = error_tag f, :suggestions
+  .form-group
+    = label f, :ip, class: "control-label"
+    = text_input f, :ip, disabled: true, class: "form-control"
+  .form-group
+    = submit "Submit", class: "btn btn-primary"

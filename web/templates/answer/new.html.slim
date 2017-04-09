@@ -1,0 +1,5 @@
+h2 New answer
+
+= render "form.html", changeset: @changeset, action: alternative_answer_path(@conn, :create, @alternative)
+
+= link "Back", to: form_path(@conn, :show, @form)

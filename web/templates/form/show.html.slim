@@ -1,0 +1,29 @@
+h2 Show form
+
+ul
+  li
+    strong Question:&nbsp;
+    = @form.question
+  li
+    strong Description:&nbsp;
+    = @form.description
+
+h3 Alternatives
+
+.alternativesContainer
+  = for {alternative, count} <- @alternatives do
+    = render LeroyJenkins.AlternativeView, "alternative.html",
+      alternative: alternative,
+      count: count,
+      conn: @conn,
+      form: @form
+
+h3 New Alternative
+
+= render LeroyJenkins.AlternativeView, "form.html",
+  changeset: @alternative_changeset,
+  action: form_alternative_path(@conn, :create, @form)
+
+= link "Edit", to: form_path(@conn, :edit, @form)
+| &nbsp;
+= link "Back", to: form_path(@conn, :index)
