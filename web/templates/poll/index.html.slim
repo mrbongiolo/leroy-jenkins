@@ -1,0 +1,6 @@
+h2 Últimas Enquetes
+
+ul
+  = for form <-  @forms do
+    li
+      = link form.question, to: poll_path(@conn, :show, form)

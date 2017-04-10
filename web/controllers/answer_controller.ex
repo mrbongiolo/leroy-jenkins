@@ -38,7 +38,7 @@ defmodule LeroyJenkins.AnswerController do
       {:ok, _answer} ->
         conn
         |> put_flash(:info, "Answer created successfully.")
-        |> redirect(to: form_path(conn, :show, alternative.form))
+        |> redirect(to: poll_results_path(conn, :results, alternative.form))
       {:error, changeset} ->
         IO.inspect changeset.errors
         render(conn, "new.html",

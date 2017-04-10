@@ -7,25 +7,34 @@ defmodule LeroyJenkins.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+  end
+
+  pipeline :allow_embed do
     plug :delete_resp_header, "x-frame-options" # Ok, this is insecure, but we need it for now to allow embedding it in an iframe
   end
 
-  pipeline :api do
-    plug :accepts, ["json"]
-  end
+  scope "/admin", LeroyJenkins do
+    pipe_through [:browser] # Use the default browser stack
 
-  scope "/", LeroyJenkins do
-    pipe_through :browser # Use the default browser stack
+    get "/", FormController, :index
 
-    get "/", PageController, :index
+    resources "/sessions", SessionController, only: [:new, :create]
 
     resources "/forms", FormController do
       resources "/alternatives", AlternativeController,
         only: [:create, :delete]
     end
+  end
 
-    resources "/alternatives", AlternativeController, only: [] do
-      resources "/answers", AnswerController,
+  scope "/embed", LeroyJenkins do
+    pipe_through [:browser, :allow_embed]
+
+    resources "/polls", PollController, only: [:index, :show] do
+      get "/results", PollController, :results, as: :results
+    end
+
+    resources "/polls", AlternativeController, as: :poll, only: [] do
+      resources "/vote", AnswerController,
         only: [:new, :create]
     end
   end

@@ -1,0 +1,20 @@
+h2 Resultados
+
+h2 = @form.question
+
+p
+  = @form.description
+
+.alternativesContainer
+  .row
+    .col-xs-8
+      strong Alternativa
+    .col-xs-4
+      strong Votos
+  = for {alternative, count} <- @alternatives do
+    .row
+      .col-xs-8 = alternative.body
+      .col-xs-4 = count
+
+
+= link "Voltar", to: poll_path(@conn, :index)

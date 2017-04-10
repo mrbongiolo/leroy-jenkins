@@ -4,6 +4,7 @@ defmodule LeroyJenkins.AlternativeController do
   alias LeroyJenkins.Form
   alias LeroyJenkins.Alternative
 
+  plug LeroyJenkins.Authenticate
   plug :scrub_params, "alternative" when action in [:create, :update]
 
   def create(conn, %{"form_id" => form_id, "alternative" => alternative_params}) do

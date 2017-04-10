@@ -4,6 +4,7 @@ defmodule LeroyJenkins.FormController do
   alias LeroyJenkins.Form
   alias LeroyJenkins.Alternative
 
+  plug LeroyJenkins.Authenticate
   plug :scrub_params, "form" when action in [:create, :update]
 
   def index(conn, _params) do

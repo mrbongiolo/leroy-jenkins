@@ -1,5 +1,5 @@
 h2 New answer
 
-= render "form.html", changeset: @changeset, action: alternative_answer_path(@conn, :create, @alternative)
+= render "form.html", changeset: @changeset, action: poll_answer_path(@conn, :create, @alternative)
 
-= link "Back", to: form_path(@conn, :show, @form)
+= link "Back", to: poll_path(@conn, :show, @form)

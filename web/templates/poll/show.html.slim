@@ -1,0 +1,18 @@
+h2 = @form.question
+
+p
+  = @form.description
+
+.alternativesContainer
+  = for alternative <- @alternatives do
+    .row
+      .col-xs-1
+        = link 'Votar',
+          to: poll_answer_path(@conn, :new, alternative),
+          class: "btn btn-xs btn-success"
+      .col-xs-6
+        = alternative.body
+
+= link "Voltar", to: poll_path(@conn, :index)
+br
+= link "Resultados", to: poll_results_path(@conn, :results, @form)
