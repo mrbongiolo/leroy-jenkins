@@ -29,6 +29,8 @@ defmodule LeroyJenkins.Router do
   scope "/embed", LeroyJenkins do
     pipe_through [:browser, :allow_embed]
 
+    get "/", PollController, :index
+
     resources "/polls", PollController, only: [:index, :show] do
       get "/results", PollController, :results, as: :results
     end
